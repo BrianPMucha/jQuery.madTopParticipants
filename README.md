@@ -7,13 +7,13 @@ This plugin for Blackbaud Luminate provides a Top Participants widget across mul
 <div class="section">                                                                                                          
   <div class="container">                                                                                                      
     <h2>Top Participants</h2>                                                                                                  
-    <div id="list_results" class="row list-results">                                                                           
+    <div id="participant_list_results" class="row list-results">                                                                           
     </div>                                                                                                                     
   </div>                                                                                                                       
 </div>                                                                                                                         
                                                                                                                                
 <!--// Results Template //-->                                                                                                  
-<script id="list_item_template" type="text/template">                                                                          
+<script id="participant_item_template" type="text/template">                                                                          
   <div class="col-12">                                                                                                         
     <div class="row shaded">                                                                                                   
       <div class="col-12 col-md-8">                                                                                            
