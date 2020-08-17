@@ -132,18 +132,15 @@
 
 					var newEntry;
 
-					var fr_id;
 					var id;
 					var name;
 					var total;
 
-					fr_id = this.fr_id;
 					id = this.id;
 					name = this.name;
 					total = this.total;
 
 					newEntry = templateHtml
-						.replace(/%%fr_id%%/g, fr_id)
 						.replace(/%%id%%/g, id)
 						.replace(/%%name%%/g, name)
 						.replace(/%%total%%/g, total);
