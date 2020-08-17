@@ -2,8 +2,8 @@
 *
 *	jQuery.madTopParticipants
 *	----------------------
-*	version: 2.0.1
-*	date: 2020/08/04
+*	version: 2.0.2
+*	date: 2020/08/17
 *	license: GPL-3.0-or-later
 *	copyright (C) 2020 Brian Patrick Mucha
 *
@@ -97,11 +97,6 @@
 				var compiledResults = [];
 				$.each(results, function( index, value ) {
 					if(value.getTopParticipantsDataResponse) {
-						var counter;
-						for (counter = 0; counter < value.getTopParticipantsDataResponse.teamraiserData.length; counter++) {
-							value.getTopParticipantsDataResponse.teamraiserData[counter].fr_id = settings.fr_ids[index];
-							value.getTopParticipantsDataResponse.teamraiserData[counter].total_num = Number(value.getTopParticipantsDataResponse.teamraiserData[counter].total.replace(/[^0-9.-]+/g,""));
-						}
 						compiledResults = [].concat(compiledResults, value.getTopParticipantsDataResponse.teamraiserData);
 					}
 				});
@@ -130,18 +125,15 @@
 
 					var newEntry;
 
-					var fr_id;
 					var id;
 					var name;
 					var total;
 
-					fr_id = this.fr_id;
 					id = this.id;
 					name = this.name;
 					total = this.total;
 
 					newEntry = templateHtml
-						.replace(/%%fr_id%%/g, fr_id)
 						.replace(/%%id%%/g, id)
 						.replace(/%%name%%/g, name)
 						.replace(/%%total%%/g, total);
