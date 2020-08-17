@@ -14,17 +14,17 @@
 * <div class="section">
 *   <div class="container">
 *     <h2>Top Participants</h2>
-*     <div id="list_results" class="row list-results">
+*     <div id="participant_list_results" class="row list-results">
 *     </div>
 *   </div>
 * </div>
 *
 * <!--// Results Template //-->
-* <script id="list_item_template" type="text/template">
+* <script id="participant_item_template" type="text/template">
 *   <div class="col-12">
 *     <div class="row shaded">
 *       <div class="col-12 col-md-8">
-*         <strong><a href="http://[[S29:DOMAIN]][[S29:PATH]]TR?px=%%id%%&pg=personal&fr_id=%%fr_id%%">%%name%%</a></strong><br />
+*         <strong>%%name%%</strong>
 *       </div>
 *       <div class="col-12 col-md-4 d-flex align-items-right">
 *         %%total%%
@@ -44,9 +44,9 @@
 *      "fr_ids":["1234", "5678"],
 *      "loadingImage": "../images/loader.gif",
 *      "loadingImageAlt": "&#x1F551",
-*      "results_template_id": "list_item_template"
+*      "results_template_id": "participant_item_template"
 *    }
-*   $("#list_results").madTopParticipants( options );
+*   $("#participant_list_results").madTopParticipants( options );
 *  });
 * </script>
 *
@@ -85,7 +85,9 @@
 				"&fr_id=" + value;
 
 			var requestURL = settings.proxyURL + escape(settings.secureConvioPath + "CRTeamraiserAPI?" + paramString);
-			var deferred = $.getJSON(requestURL, function (result) { results.push(result); });
+			var deferred = $.getJSON(requestURL, function (result) { 
+				results.push(result); 
+			});
 
 			deferreds.push(deferred);
 
@@ -95,8 +97,13 @@
 			.then(function()
 			{
 				var compiledResults = [];
+				var args = Array.prototype.slice.call(arguments, 0);
 				$.each(results, function( index, value ) {
 					if(value.getTopParticipantsDataResponse) {
+						var counter;
+						for (counter = 0; counter < value.getTopParticipantsDataResponse.teamraiserData.length; counter++) {
+							value.getTopParticipantsDataResponse.teamraiserData[counter].total_num = Number(value.getTopParticipantsDataResponse.teamraiserData[counter].total.replace(/[^0-9.-]+/g,""));
+						}
 						compiledResults = [].concat(compiledResults, value.getTopParticipantsDataResponse.teamraiserData);
 					}
 				});
@@ -125,15 +132,18 @@
 
 					var newEntry;
 
+					var fr_id;
 					var id;
 					var name;
 					var total;
 
+					fr_id = this.fr_id;
 					id = this.id;
 					name = this.name;
 					total = this.total;
 
 					newEntry = templateHtml
+						.replace(/%%fr_id%%/g, fr_id)
 						.replace(/%%id%%/g, id)
 						.replace(/%%name%%/g, name)
 						.replace(/%%total%%/g, total);
