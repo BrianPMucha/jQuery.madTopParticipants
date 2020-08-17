@@ -17,7 +17,7 @@ This plugin for Blackbaud Luminate provides a Top Participants widget across mul
   <div class="col-12">                                                                                                         
     <div class="row shaded">                                                                                                   
       <div class="col-12 col-md-8">                                                                                            
-        <strong><a href="http://[[S29:DOMAIN]][[S29:PATH]]TR?px=%%id%%&pg=personal&fr_id=%%fr_id%%">%%name%%</a></strong><br />
+        <strong>%%name%%</strong>
       </div>                                                                                                                   
       <div class="col-12 col-md-4 d-flex align-items-right">                                                                   
         %%total%%                                                                                                              
