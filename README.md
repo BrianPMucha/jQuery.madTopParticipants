@@ -7,24 +7,19 @@ This plugin for Blackbaud Luminate provides a Top Participants widget across mul
 <div class="section">                                                                                                          
   <div class="container">                                                                                                      
     <h2>Top Participants</h2>                                                                                                  
-    <div id="top_participant_results" class="row list-results">                                                                           
-    </div>                                                                                                                     
+    <div id="top_participant_results" class="row list-results"></div>                                                                                                                     
   </div>                                                                                                                       
 </div>                                                                                                                         
                                                                                                                                
-<!--// Results Template //-->                                                                                                  
-<script id="participant_results_template" type="text/template">                                                                          
-  <div class="col-12">                                                                                                         
-    <div class="row shaded">                                                                                                   
-      <div class="col-12 col-md-8">                                                                                            
-        <strong>%%name%%</strong>
-      </div>                                                                                                                   
-      <div class="col-12 col-md-4 d-flex align-items-right">                                                                   
-        %%total%%                                                                                                              
-      </div>                                                                                                                   
-    </div>                                                                                                                     
-  </div>                                                                                                                       
-</script>                                                                                                                      
+<!--// Results Template //-->
+<script id="results_template_top_parts" type="text/template">
+	<div class="col-12 col-lg-8">
+		<strong>%%name%%</strong>
+	</div>
+	<div class="col-12 col-lg-4 text-right">
+		%%total%%
+	</div>
+</script>                                                                                                                   
 ```
 ```javascript
 <script>                                                                                                                       
