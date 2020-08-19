@@ -20,8 +20,8 @@ This plugin for Blackbaud Luminate provides a Top Participants widget across mul
 		%%total%%
 	</div>
 </script>                                                                                                                   
-```
-```javascript
+
+<!--// Init Top Participants //-->
 <script>                                                                                                                       
  jQuery(document).ready(function ($) {                                                                                         
    var options =                                                                                                               
@@ -34,7 +34,7 @@ This plugin for Blackbaud Luminate provides a Top Participants widget across mul
      "maxCount": 10,                                                                                                
      "loadingImage": "../images/loader.gif",                                                                                   
      "loadingImageAlt": "&#x1F551",                                                                                            
-     "results_template_id": "participant_results_template"                                                                               
+     "results_template_id": "results_template_top_parts"                                                                               
    }                                                                                                                           
   $("#top_participant_results").madTopParticipants( options );                                                                            
  });                                                                                                                           
