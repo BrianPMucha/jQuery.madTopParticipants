@@ -7,13 +7,13 @@ This plugin for Blackbaud Luminate provides a Top Participants widget across mul
 <div class="section">                                                                                                          
   <div class="container">                                                                                                      
     <h2>Top Participants</h2>                                                                                                  
-    <div id="participant_list_results" class="row list-results">                                                                           
+    <div id="top_participant_results" class="row list-results">                                                                           
     </div>                                                                                                                     
   </div>                                                                                                                       
 </div>                                                                                                                         
                                                                                                                                
 <!--// Results Template //-->                                                                                                  
-<script id="participant_item_template" type="text/template">                                                                          
+<script id="participant_results_template" type="text/template">                                                                          
   <div class="col-12">                                                                                                         
     <div class="row shaded">                                                                                                   
       <div class="col-12 col-md-8">                                                                                            
@@ -35,12 +35,13 @@ This plugin for Blackbaud Luminate provides a Top Participants widget across mul
      "nonsecureConvioPath":"http://[[S29:DOMAIN]][[S29:PATH]]",                                                                
      "secureConvioPath":"https://[[S29:SECURE_DOMAIN]][[S29:SECURE_PATH]]",                                                    
      "apiKey":"[[S0:CONVIO_API_KEY]]",                                                                                         
-     "fr_ids":["1234", "5678"],                                                                                                
+     "fr_ids":["1234", "5678"],
+     "maxCount": 10,                                                                                                
      "loadingImage": "../images/loader.gif",                                                                                   
      "loadingImageAlt": "&#x1F551",                                                                                            
-     "results_template_id": "list_item_template"                                                                               
+     "results_template_id": "participant_results_template"                                                                               
    }                                                                                                                           
-  $("#list_results").madTopParticipants( options );                                                                            
+  $("#top_participant_results").madTopParticipants( options );                                                                            
  });                                                                                                                           
 </script>                                                                                                                      
 ```
