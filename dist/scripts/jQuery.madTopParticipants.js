@@ -2,8 +2,8 @@
 *
 *	jQuery.madTopParticipants
 *	----------------------
-*	version: 2.0.2
-*	date: 2020/08/17
+*	version: 2.0.3
+*	date: 2020/08/19
 *	license: GPL-3.0-or-later
 *	copyright (C) 2020 Brian Patrick Mucha
 *
@@ -14,25 +14,21 @@
 * <div class="section">
 *   <div class="container">
 *     <h2>Top Participants</h2>
-*     <div id="participant_list_results" class="row list-results">
-*     </div>
+*     <div id="top_participant_results" class="row list-results"></div>
 *   </div>
 * </div>
 *
 * <!--// Results Template //-->
-* <script id="participant_item_template" type="text/template">
-*   <div class="col-12">
-*     <div class="row shaded">
-*       <div class="col-12 col-md-8">
-*         <strong>%%name%%</strong>
-*       </div>
-*       <div class="col-12 col-md-4 d-flex align-items-right">
-*         %%total%%
-*       </div>
-*     </div>
+* <script id="results_template_top_parts" type="text/template">
+*   <div class="col-12 col-lg-8">
+*     <strong>%%name%%</strong>
+*   </div>
+*   <div class="col-12 col-lg-4 text-right">
+*     <em>%%total%%</em>
 *   </div>
 * </script>
 *
+* <!--// Init Top Participants //-->
 * <script>
 *  jQuery(document).ready(function ($) {
 *    var options =
@@ -42,11 +38,12 @@
 *      "secureConvioPath":"https://[[S29:SECURE_DOMAIN]][[S29:SECURE_PATH]]",
 *      "apiKey":"[[S0:CONVIO_API_KEY]]",
 *      "fr_ids":["1234", "5678"],
+*      "maxCount": "10",
 *      "loadingImage": "../images/loader.gif",
 *      "loadingImageAlt": "&#x1F551",
-*      "results_template_id": "participant_item_template"
+*      "results_template_id": "results_template_top_parts"
 *    }
-*   $("#participant_list_results").madTopParticipants( options );
+*   $("#top_participant_results").madTopParticipants( options );
 *  });
 * </script>
 *
@@ -59,7 +56,7 @@
 	/* ********** Private Functions ********** */
 
 	function markLoading(element, settings) {
-		$(".search_item").remove();
+		$(element).empty();
 		if (settings.loadingImage && settings.loadingText) {
 			element.append("<div class=\"list_loading\"><img alt=\"" + settings.loadingImageAlt + "\" src=\"" + settings.loadingImage + "\" />" + settings.loadingText + "</div>");
 		} else if (settings.loadingImage) {
@@ -85,8 +82,8 @@
 				"&fr_id=" + value;
 
 			var requestURL = settings.proxyURL + escape(settings.secureConvioPath + "CRTeamraiserAPI?" + paramString);
-			var deferred = $.getJSON(requestURL, function (result) { 
-				results.push(result); 
+			var deferred = $.getJSON(requestURL, function (result) {
+				results.push(result);
 			});
 
 			deferreds.push(deferred);
@@ -119,7 +116,7 @@
 	function updateDomElement(data, element, settings) {
 		if( data.errorResponse )
 		{
-			element.html("<div class=\"search_loading\">(" + data.errorResponse.message + ")</div>");
+			element.html("<div class=\"list_message\">(" + data.errorResponse.message + ")</div>");
 		} else {
 			$(element).empty();
 			var trObject = ensureArray(data);
@@ -147,11 +144,11 @@
 
 					element.append(newEntry);
 
-					if(idx == settings.maxCount) { return false; }
+					if(idx+1 == settings.maxCount) { return false; }
 
 				});
 			} else {
-				element.html("<div class=\"search_loading\">(end of list)</div>");
+				element.html("<div class=\"list_message\">(end of list)</div>");
 			}
 			if (settings.callBack) { settings.callBack(); }
 		}
